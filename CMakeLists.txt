@@ -14,6 +14,9 @@ if(WIN32)
 # Mac libraries.
 elseif(APPLE)
     set(SteamAudio_LIBRARY "${CMAKE_CURRENT_SOURCE_DIR}/lib/OSX/libphonon.dylib")
+# Android libraries.
+elseif(ANDROID)
+    set(SteamAudio_LIBRARY "${CMAKE_CURRENT_SOURCE_DIR}/lib/Android/libphonon.so")
 # Linux libraries.
 elseif(UNIX)
     # 64-bit.
