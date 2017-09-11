@@ -11,6 +11,9 @@ if(WIN32)
     else()
         set(SteamAudio_LIBRARY "${CMAKE_CURRENT_SOURCE_DIR}/lib/Windows/x86/phonon.lib")
     endif()
+# Mac libraries.
+elseif(APPLE)
+    set(SteamAudio_LIBRARY "${CMAKE_CURRENT_SOURCE_DIR}/lib/OSX/libphonon.dylib")
 endif()
 
 add_library(SteamAudio INTERFACE)
