@@ -7,11 +7,19 @@ if(WIN32)
     # 64-bit.
     if(CMAKE_SIZEOF_VOID_P EQUAL 8)
         set(SteamAudio_LIBRARY "${CMAKE_CURRENT_SOURCE_DIR}/lib/Windows/x64/phonon.lib")
-        configure_file("${CMAKE_CURRENT_SOURCE_DIR}/bin/Windows/x64/phonon.dll" ${CMAKE_RUNTIME_OUTPUT_DIRECTORY} COPYONLY)
+        set(SteamAudio_DLL "${CMAKE_CURRENT_SOURCE_DIR}/bin/Windows/x64/phonon.dll")
     # 32-bit.
     else()
         set(SteamAudio_LIBRARY "${CMAKE_CURRENT_SOURCE_DIR}/lib/Windows/x86/phonon.lib")
-        configure_file("${CMAKE_CURRENT_SOURCE_DIR}/bin/Windows/x86/phonon.dll" ${CMAKE_RUNTIME_OUTPUT_DIRECTORY} COPYONLY)
+        set(SteamAudio_DLL "${CMAKE_CURRENT_SOURCE_DIR}/bin/Windows/x86/phonon.dll")
+    endif()
+    
+    # Copy DLL to build directory.
+    if(MSVC)
+        configure_file(${SteamAudio_DLL} ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug/phonon.dll COPYONLY)
+        configure_file(${SteamAudio_DLL} ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Release/phonon.dll COPYONLY)
+    else()
+        configure_file(${SteamAudio_DLL} ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/phonon.dll COPYONLY)
     endif()
 # Mac.
 elseif(APPLE)
